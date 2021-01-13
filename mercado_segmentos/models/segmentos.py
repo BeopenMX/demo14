@@ -2,6 +2,7 @@ import base64
 
 from odoo import models, fields, api, _
 
+
 # 'mkt','monterrey','guadalajara','leon','mexico','puebla'
 
 class Segmentos(models.Model):
@@ -26,3 +27,14 @@ class SegmentosLine(models.Model):
                                                           ('guadalajara', 'Guadalajara'), ('leon', 'Leon'),
                                                           ('mexico', 'Mexico'), ('puebla', 'Puebla'), ],
                               required=False)
+    display_name = fields.Char(string="Display name", readonly=True, store=True,
+                               compute="_compute_dispay_name", )
+
+    @api.depends('segmento_id.name', 'region')
+    def _compute_dispay_name(self):
+        for record in self:
+            region = dict(self._fields['region'].selection).get(record.region) if record.region else ''
+            record.display_name = '%s (%s)' % (record.segmento_id.name, region)
+
+    def name_get(self):
+    	return [(segmento.id, '%s' % segmento.display_name) for segmento in self]
