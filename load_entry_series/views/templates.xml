@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="view_loadstockpicking_form_inherit" model="ir.ui.view">
+            <field name="name">view.wnimxstockpicking.form.add.text.field</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+  
+               <xpath expr="//header/button[@name='action_toggle_is_locked']" position="after">
+                  
+                   <button 
+                    name="cargar_series"  
+                    string="Cargar Series" 
+                    type="object" 
+                    attrs="{'invisible': [('state', '=', 'draft'),('picking_type_code','!=','incoming')]}" 
+                    state="confirmed" />
+                    <button 
+                     name="update_series"
+                     string="Actualizar Series"
+                     type="object"
+                     confirm="Esta accion borrara las series actuales, ¿Desea continuar la operacion?"
+                     attrs="{'invisible': [('state', '!=', 'assigned')]}"
+                     />
+                </xpath>
+             </field>
+        </record>
+    </data>
+</odoo>
