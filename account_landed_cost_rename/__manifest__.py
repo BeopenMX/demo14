@@ -15,7 +15,6 @@
         ],
     'demo': [],
     'test': [],
-    "post_load": "post_load",
     'installable': True,
     'auto_install': False,
 }
