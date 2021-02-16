@@ -23,6 +23,7 @@ class AccountMove(models.Model):
 
 
 class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
 
     customs_number = fields.Char(
         help='Optional field for entering the customs information in the case '

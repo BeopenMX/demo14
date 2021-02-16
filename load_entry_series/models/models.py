@@ -92,6 +92,7 @@ class StockPickingWNI(models.Model):
                                             if (x.lot_name == False or x.lot_name == '') and asignada == False:
                                                 print("averts", serie, asignada)
                                                 x.lot_name = serie
+                                                x.qty_done = 1
                                                 asignada = True
                                                 print("asiganda", serie, asignada)
 
